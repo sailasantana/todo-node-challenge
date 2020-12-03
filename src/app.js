@@ -9,6 +9,7 @@ const TodoService = require('./todo/todo-service')
 const xss = require('xss')
 const jsonParser = express.json()
 const path = require('path')
+const todoRouter = require('./todo-router')
 
 const app = express()
 
@@ -23,6 +24,8 @@ app.use(cors())
 app.use(helmet())
 
 app.use(express.static('public'))
+
+app.use('/v1', todoRouter)
 
 const serializeTodo = todo => ({
   id: todo.id,
